@@ -1,0 +1,44 @@
+#!/usr/bin/env ruby
+#!/usr/bin/ruby -rubygems
+# Geek: Henry J. Escobar
+# Contact: henry.escobar@gmail.com
+# GIT: https://github.com/HenryEscobar/printJson
+#
+# Purpose: Print a json file in a nice format
+# Bugs
+#
+# Notes:  Just a quick simple util anyone should be able to write.
+#
+require "json"
+require "rubygems"
+
+if ( ARGV.length < 1 ) 
+   puts "USAGE: printJson.rb <filename1> ... <filenameN>"
+   exit 1
+end
+
+ARGV.each do |a|
+   puts "======================= File: #{a} ======================= "
+   if ( File.file?(a) )
+      begin 
+         inputJson=JSON.parse( IO.read(a))
+      rescue
+         puts "ERROR: JSON parse error in file #{a}. Continuing"
+         next
+      end
+   else 
+      puts "ERROR: #{a} is not a file. Continuning"
+      next
+   end
+   #puts JSON.pretty_generate(JSON.parse(inputJson)) 
+   puts JSON.pretty_generate(inputJson)
+       
+end # ARTGV.each do
+
+exit
+
+#pheader "Nice Json output"
+
+#pheader "Dumping hash2D to json.dump"
+#jsonOut=File.open("json.dump","w")
+# JSON.dump(hash2D,jsonOut)
